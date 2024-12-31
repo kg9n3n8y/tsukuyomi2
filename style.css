@@ -1,15 +1,20 @@
 body {
   background-color : #E1DAC3;
-  font-size        : medium;
+  font-size        : 23px;
   font-family      : "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
 }
 h1 {
   color            : #333333;
-  font-size        : xx-large;
+  font-size        : 28px;
+  margin    : 0;
+}
+p{
+  margin           : 10px auto ;
 }
 table {
   border           : none;
   padding          : 0;
+  writing-mode     : vertical-rl;
 }
 td {
   background-color : #FFFFFF;
@@ -17,9 +22,10 @@ td {
   border-width     : 0.3rem;
   border-style     : solid;
   border-radius    : 0.3rem;
-  width            : auto;
+  height           : 400px;
+  width            : 135px;
   padding          : 0;
-  line-height      : 2rem;
+  line-height      : 3rem;
   position         : relative;
   font-family      : "Hiragino Maru Gothic ProN", "Meiryo", sans-serif;
 }
@@ -31,60 +37,51 @@ input[type=button] {
   font-size        : medium;
   width            : auto;
   padding          : 0.5rem 1rem;
-}
-input[type=checkbox] {
-  display          : none;
+  font-size        : 20px;
 }
 label {
   display          : block;
-  padding          : 0.8rem 0.5rem 0.3rem 0.5rem;
-}
-input:checked + label {
-  background-color : #CCCCCC;
+  padding          : 1rem 0.8rem 0.5rem 0.8rem;
 }
 iframe {
   border           : 0;
 }
 .num{
-  font-size        : 0.8rem;
+  font-size        : 1rem;
   position         : absolute;
   right            : 0.5rem;
-  bottom           : 0.1rem;
+  bottom           : -0.3rem;
+  writing-mode     : horizontal-tb;
 }
 
 
 /* ここからタイマー用 */
 .float-buttons {
-  position: fixed;
-  bottom: 70px;
-  right: 10px;
-  flex-direction: column;
-  gap: 10px;
-  display: none;
-}
-
-.float-buttons.visible {
-  display: flex;
+  position         : absolute;
+  top              : 463px;
+  left             : 158px;
+  flex-direction   : column;
+  gap              : 10px;
 }
 
 .float-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: none;
-  background-color: #ffffff;
-  color: #000000;
-  font-size: 14px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  font-weight: bold;
-  box-shadow: 2px 2px 4px gray;
+  width            : 70px;
+  height           : 70px;
+  border-radius    : 50%;
+  border           : none;
+  background-color : #ffffff;
+  color            : #000000;
+  font-size        : 16px;
+  cursor           : pointer;
+  position         : relative;
+  overflow         : hidden;
+  font-weight      : bold;
+  box-shadow       : 2px 2px 4px gray;
 }
 
 .button-text {
-  position: relative;
-  z-index: 2;
+  position         : relative;
+  z-index          : 2;
 }
 
 .circle-progress {
@@ -132,19 +129,4 @@ iframe {
   to {
       stroke-dashoffset: 283;
   }
-}
-
-.toggle-button {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px 10px;
-  font-size: 14px;
-  background-color: #ffffff;
-  color: #000000;
-  border: 3px solid #336633;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 2px 2px 4px gray;
 }
