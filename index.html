@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>月読(読み札)</title>
+    <link rel="shortcut icon" type="image/png" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icon.png">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./fudalist.js"></script>
+  </head>
+
+  <body>
+    <h1>読札アプリ <ruby><rb>月</rb><rp>（</rp><rt>つく</rt><rp>）</rp><rb>読</rb><rp>（</rp><rt>よみ</rt><rp>）</rp></ruby> ver.2</h1>
+
+    <p>
+      <input type="button" onclick="reloadPage()" value="  読み札をシャッフル  ">
+    </p>
+
+    <div id="insert_table">
+      <table>
+          <tr>
+            <td id="shimonoku"></td>
+          </tr>
+          <tr>
+            <td id="kaminoku"></td>
+          </tr>
+      </table>
+    </div>
+
+    <div class="float-buttons">
+      <!-- <button id="top-button" class="float-button">
+          <span class="button-text">下の句</span>
+          <svg class="circle-progress" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45"/>
+          </svg>
+      </button> -->
+      <button id="middle-button" class="float-button">
+        <span class="button-text">余韻<br>間</span>
+        <svg class="circle-progress" viewBox="0 0 100 100">
+            <circle class="main-circle" cx="50" cy="50" r="45"/>
+            <path class="quarter-circle" d="M 95,50 A 45,45 0 0,1 50,95"/>
+        </svg>
+      </button>
+      <!-- <button id="bottom-button" class="float-button">
+          <span class="button-text">上の句</span>
+          <svg class="circle-progress" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45"/>
+          </svg>
+      </button> -->
+    </div>
+    <script src="script.js"></script>
+  </body>
+
+</html>
