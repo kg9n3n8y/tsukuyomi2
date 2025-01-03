@@ -64,7 +64,7 @@ function concatNumberTag(array) {
   const result = [...array];
   
   // 配列に数字を付与する
-  for (let i = 2; i < 102; i++) {
+  for (let i = 2; i < result.length - 1; i++) {
     let tag = "<span class='num'>" + (i - 1) + "</span>";
     result[i].kaminoku  = tag.concat(result[i].kaminoku);
     result[i].shimonoku = tag.concat(result[i].shimonoku);
