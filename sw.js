@@ -1,25 +1,30 @@
-// PWA対応：Service Worker
-
-var CACHE_NAME = 'task-management';
-var urlsToCache = [
+// Cache name
+const CACHE_NAME = 'pwa-sample-caches-v1';
+// Cache targets
+const urlsToCache = [
+  './',
+  './index.html',
+  './style.css',
+  './fudalist.js',
+  './script.js'
 ];
 
-self.addEventListener('install', function(event) {
-    event.waitUntil(
-        caches
-            .open(CACHE_NAME)
-            .then(function(cache) {
-                return cache.addAll(urlsToCache);
-            })
-    );
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => {
+        return cache.addAll(urlsToCache);
+      })
+  );
 });
 
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-        caches
-            .match(event.request)
-            .then(function(response) {
-                return response || fetch(event.request);
-            })
-    );
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches
+      .match(event.request)
+      .then((response) => {
+        return response ? response : fetch(event.request);
+      })
+  );
 });
