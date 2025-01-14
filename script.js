@@ -23,6 +23,10 @@ document.getElementById('kaminoku').addEventListener('click', () => {
   if (currentIndex < 101) {
       currentIndex++;
       updateDisplay();
+
+      // 非表示になっているタイマーを表示
+      let button = document.getElementById("middle-button");
+      button.style.display = 'block';
   }
 });
 
@@ -32,6 +36,10 @@ document.getElementById('shimonoku').addEventListener('click', () => {
   if (currentIndex > 0) {
       currentIndex--;
       updateDisplay();
+
+      // 非表示になっているタイマーを表示
+      let button = document.getElementById("middle-button");
+      button.style.display = 'block';
   }
 });
 
@@ -91,19 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => {
           const circle = button.querySelector('circle') || button.querySelector('.main-circle');
           const quarterCircle = button.querySelector('.quarter-circle');
-          let duration;
           
           switch(button.id) {
-              case 'top-button':
-                  duration = 5;
-                  animateCircle(circle, duration);
-                  break;
               case 'middle-button':
-                  animateMiddleButton(circle, quarterCircle);
-                  break;
-              case 'bottom-button':
-                  duration = 6;
-                  animateCircle(circle, duration);
+                  animateMiddleButton(circle, quarterCircle, button);
                   break;
           }
       });
@@ -125,7 +124,7 @@ function animateCircle(circle, duration) {
   }, duration * 1000);
 }
 
-function animateMiddleButton(mainCircle, quarterCircle) {
+function animateMiddleButton(mainCircle, quarterCircle, button) {
   mainCircle.style.animation = 'disappear-main 4s linear forwards';
   
   setTimeout(() => {
@@ -134,6 +133,7 @@ function animateMiddleButton(mainCircle, quarterCircle) {
       setTimeout(() => {
           mainCircle.style.animation = '';
           quarterCircle.style.animation = '';
+          button.style.display = 'none'; // ボタンを非表示にする
       }, 1000);
   }, 3000);
 }

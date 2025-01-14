@@ -58,25 +58,31 @@ iframe {
 /* ここからタイマー用 */
 .float-buttons {
   position         : absolute;
-  top              : 463px;
+  top              : 443px;
   left             : 158px;
   flex-direction   : column;
   gap              : 10px;
 }
 
 .float-button {
-  width            : 70px;
-  height           : 70px;
+  width            : 90px;
+  height           : 90px;
   border-radius    : 50%;
   border           : none;
   background-color : #ffffff;
   color            : #000000;
-  font-size        : 16px;
+  font-size        : 20px;
   cursor           : pointer;
   position         : relative;
   overflow         : hidden;
   font-weight      : bold;
   box-shadow       : 2px 2px 4px gray;
+  transition       : opacity 0.3s ease-out;
+}
+
+.float-button.hidden {
+  opacity: 0;
+  display: none;
 }
 
 .button-text {
