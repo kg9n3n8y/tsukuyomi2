@@ -90,6 +90,14 @@ iframe {
   z-index          : 2;
 }
 
+.yoin {
+  color: #336633;
+}
+
+.ma {
+  color: #ff6600;
+}
+
 .circle-progress {
   position: absolute;
   top: 0;
@@ -115,7 +123,7 @@ iframe {
 }
 
 #middle-button .circle-progress .quarter-circle {
-  stroke: #ff9900;
+  stroke: #ff6600;
   stroke-dasharray: 71;
 }
 
