@@ -1,47 +1,54 @@
 // 読み札リストを作成
-let yomifudalist = shuffleExceptFirstAndSecond(fudalist);
+const yomifudalist = addNumberTags(shuffleExceptFirstAndSecond(fudalist));
+
+// 表示対象とする要素の参照を保持
+const shimonokuElement = document.getElementById('shimonoku');
+const kaminokuElement = document.getElementById('kaminoku');
+const middleButton = document.getElementById('middle-button');
 
 // 何枚目かを表す数字を入れる
-yomifudalist = concatNumberTag(yomifudalist);
-
-// 表示する札を表す変数
 let currentIndex = 0;
+const lastPlayableIndex = Math.max(0, yomifudalist.length - 2);
 
 // 読み札の表示
 function updateDisplay() {
-  const shimonokuElement = document.getElementById('shimonoku');
-  const kaminokuElement = document.getElementById('kaminoku');
+  if (!shimonokuElement || !kaminokuElement) {
+    return;
+  }
 
   // innerHTMLを使用してHTMLタグを解釈して表示
   shimonokuElement.innerHTML = yomifudalist[currentIndex].shimonoku;
-  kaminokuElement.innerHTML = yomifudalist[currentIndex + 1].kaminoku;
+  const nextIndex = Math.min(currentIndex + 1, yomifudalist.length - 1);
+  kaminokuElement.innerHTML = yomifudalist[nextIndex].kaminoku;
 }
 
+function showMiddleButton() {
+  if (middleButton) {
+    middleButton.style.display = 'block';
+  }
+}
 
 // 上の句クリックで進む
-document.getElementById('kaminoku').addEventListener('click', () => {
-  if (currentIndex < 101) {
+if (kaminokuElement) {
+  kaminokuElement.addEventListener('click', () => {
+    if (currentIndex < lastPlayableIndex) {
       currentIndex++;
       updateDisplay();
-
-      // 非表示になっているタイマーを表示
-      let button = document.getElementById("middle-button");
-      button.style.display = 'block';
-  }
-});
-
+      showMiddleButton();
+    }
+  });
+}
 
 // 下の句クリックで戻る
-document.getElementById('shimonoku').addEventListener('click', () => {
-  if (currentIndex > 0) {
+if (shimonokuElement) {
+  shimonokuElement.addEventListener('click', () => {
+    if (currentIndex > 0) {
       currentIndex--;
       updateDisplay();
-
-      // 非表示になっているタイマーを表示
-      let button = document.getElementById("middle-button");
-      button.style.display = 'block';
-  }
-});
+      showMiddleButton();
+    }
+  });
+}
 
 // 初期表示
 updateDisplay();
@@ -49,36 +56,36 @@ updateDisplay();
 
 // 配列の3〜102番目のシャッフル
 function shuffleExceptFirstAndSecond(array) {
-    // 最初の2要素と最後の要素を保持
-    const firstTwo = array.slice(0, 2);
-    const last = array.slice(-1);
-    // シャッフルする部分を取得
-    const toShuffle = array.slice(2, -1);
-    
-    // Fisher-Yatesアルゴリズムでシャッフル
+    const SHUFFLE_START_INDEX = 2;
+    const SHUFFLE_END_INDEX = array.length - 1;
+
+    const fixedHead = array.slice(0, SHUFFLE_START_INDEX);
+    const fixedTail = array.slice(SHUFFLE_END_INDEX);
+    const toShuffle = array.slice(SHUFFLE_START_INDEX, SHUFFLE_END_INDEX);
+
     for (let i = toShuffle.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [toShuffle[i], toShuffle[j]] = [toShuffle[j], toShuffle[i]];
     }
-    
-    // 保持した要素とシャッフルした要素を結合
-    return [...firstTwo, ...toShuffle, ...last];
+
+    return [...fixedHead, ...toShuffle, ...fixedTail];
 }
 
 
 // 数字をつける
-function concatNumberTag(array) {
-  // 配列のコピーを作成
-  const result = [...array];
-  
-  // 配列に数字を付与する
-  for (let i = 2; i < result.length - 1; i++) {
-    let tag = "<span class='num'>" + (i - 1) + "</span>";
-    result[i].kaminoku  = tag.concat(result[i].kaminoku);
-    result[i].shimonoku = tag.concat(result[i].shimonoku);
-  }
-  
-  return result;
+function addNumberTags(array) {
+  return array.map((item, index) => {
+    if (index < 2 || index >= array.length - 1) {
+      return { ...item };
+    }
+
+    const tag = `<span class='num'>${index - 1}</span>`;
+    return {
+      ...item,
+      kaminoku: tag + item.kaminoku,
+      shimonoku: tag + item.shimonoku,
+    };
+  });
 }
 
 
@@ -108,12 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 
-  const toggleButton = document.getElementById('toggle-button');
   const floatButtons = document.querySelector('.float-buttons');
+  const toggleButton = document.getElementById('toggle-button');
 
-  toggleButton.addEventListener('click', () => {
-    floatButtons.classList.toggle('visible');
-  });
+  if (toggleButton && floatButtons) {
+    toggleButton.addEventListener('click', () => {
+      floatButtons.classList.toggle('visible');
+    });
+  }
 });
 
 function animateCircle(circle, duration) {
